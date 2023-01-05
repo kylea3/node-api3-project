@@ -45,6 +45,13 @@ router.put('/:id', validateUserId, validatePost, validateUser, (req, res) => {
   // RETURN THE FRESHLY UPDATED USER OBJECT
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
+  User.update(req.params.id, { name: req.name })
+    .then(user => {
+      res.status(201).json(user)
+    })
+    .catch(err => {
+      res.status(500).json({ message: "something happened with the server"})
+   })
 });
 
 router.delete('/:id', validateUserId, (req, res) => {
