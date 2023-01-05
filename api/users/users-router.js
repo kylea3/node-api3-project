@@ -41,7 +41,7 @@ router.post('/', validateUser, (req, res) => {
     })
 });
 
-router.put('/:id', validateUserId, validatePost, validateUser, (req, res) => {
+router.put('/:id', validateUserId, validateUser, validatePost, (req, res) => {
   // RETURN THE FRESHLY UPDATED USER OBJECT
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
