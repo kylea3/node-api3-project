@@ -10,6 +10,13 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   // RETURN AN ARRAY WITH ALL THE USERS
+  User.get()
+    .then(user => {
+      res.status(200).json(user)
+    })
+    .catch(err => {
+      res.status(500).json({ message: "something happened with the server"})
+    })
 });
 
 router.get('/:id', validateUserId, (req, res) => {
