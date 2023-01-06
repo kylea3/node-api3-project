@@ -65,17 +65,16 @@ router.delete('/:id', validateUserId, async (req, res) => {
     }
 });
 
-router.get('/:id/posts', validateUserId, (req, res) => {
+router.get('/:id/posts', validateUserId, async (req, res) => {
   // RETURN THE ARRAY OF USER POSTS
   // this needs a middleware to verify user id
-  Post.getById(req.params.id)
-    .then(post => {
-      res.status(200).json(post)
-    })
-    .catch(err => {
+  try {
+  const result = await User.getUserPosts(req.params.id)
+      res.status(200).json(result)
+    }
+    catch(err) {
       res.status(500).json({ message: "something happened with the server"})
     }
-    )
 });
 
 router.post('/:id/posts', validateUserId, validatePost, async  (req, res) => {
